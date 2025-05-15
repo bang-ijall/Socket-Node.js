@@ -26,9 +26,9 @@ io.on('connection', (socket) => {
   socket.on('heartbeat', (userId) => {
     if (userStatus[userId]) {
       userStatus[userId].lastSeen = Date.now();
-      if (userStatus[userId].status !== 'online') {
-        userStatus[userId].status = 'online';
-        updateSharedHosting(userId, 'online');
+      if (userStatus[userId].status !== 'Online') {
+        userStatus[userId].status = 'Online';
+        updateSharedHosting(userId, 'Online');
       }
     }
   });
@@ -36,9 +36,9 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const userId = Object.keys(userStatus).find(id => userStatus[id].socketId === socket.id);
     if (userId) {
-      userStatus[userId].status = 'offline';
+      userStatus[userId].status = 'Offline';
       userStatus[userId].lastSeen = Date.now();
-      updateSharedHosting(userId, 'offline');
+      updateSharedHosting(userId, 'Offline');
     }
   });
 });
